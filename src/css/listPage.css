@@ -1,0 +1,117 @@
+#list-page {
+  widows: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f8f8f8;
+}
+#list-page .left-panel {
+  width: 200px;
+  float: left;
+  height: 100vh;
+  border-right: 1px solid #dddddd;
+}
+#list-page .main-panel {
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: calc(100vw-200px);
+  margin-left: 200px;
+  padding: 15px;
+}
+#list-page .main-panel table.table {
+  width: 100%;
+  background-color: white;
+}
+#list-page .main-panel table.table tbody.gray-row {
+  background-color: #f8f8f8;
+}
+#list-page .main-panel table.table tbody.gray-row .tr {
+  background-color: #f8f8f8;
+}
+#list-page .main-panel table.table tbody.gray-row .tr .td {
+  background-color: #f8f8f8;
+}
+#list-page .main-panel table.table .state-img {
+  background-size: 100% 100%;
+  width: 30px;
+  height: 30px;
+}
+#list-page .main-panel table.table .state-img.green {
+  background-image: url(../images/green.png);
+}
+#list-page .main-panel table.table .state-img.yellow {
+  background-image: url(../images/yellow.png);
+}
+#list-page .main-panel table.table .state-img.red {
+  background-image: url(../images/red.png);
+}
+#list-page .main-panel table.table .state-img.gray {
+  background-image: url(../images/gray.png);
+}
+#list-page .main-panel table.table thead th,
+#list-page .main-panel table.table tbody td {
+  border-left: none;
+  border-right: none;
+}
+#list-page .main-panel table.table thead th {
+  height: 25px;
+  line-height: 25px;
+}
+#list-page .main-panel table.table tbody td {
+  line-height: 30px;
+}
+#list-page .main-panel table.table tbody td .switch-component {
+  top: 5px;
+}
+#list-page .main-panel table.table tbody td .button {
+  top: 1.5px;
+}
+#list-page .main-panel table.table .param-td {
+  padding: 10px;
+  background-color: #f8f8f8;
+}
+#list-page .main-panel table.table .param-td .param-area {
+  border: 1px solid gray;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  width: 100%;
+  box-shadow: 2px 2px 2px #c5c5c5;
+  position: relative;
+  display: inline-block;
+}
+#list-page .main-panel table.table .param-td .param-area::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  /* 提示工具头部 */
+  right: 100px;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+#list-page .main-panel table.table .param-td .param-area .param-table {
+  border: none;
+  width: 100%;
+}
+#list-page .main-panel table.table .param-td .param-area .param-table tr,
+#list-page .main-panel table.table .param-td .param-area .param-table td {
+  border: none;
+}
+#list-page .main-panel table.table .param-td .param-area .param-table tr .button,
+#list-page .main-panel table.table .param-td .param-area .param-table td .button {
+  top: 0px;
+}
+#list-page .main-panel table.table .param-td .param-area .param-table .check-td {
+  width: 35px;
+}
+#list-page .main-panel table.table .param-td .param-area .param-table .param-input {
+  min-width: 300px;
+  max-width: 500px;
+}
+#list-page .main-panel table.table .param-td .param-area .param-table .save-btn,
+#list-page .main-panel table.table .param-td .param-area .param-table .add-btn {
+  float: right;
+  margin-left: 10px;
+}

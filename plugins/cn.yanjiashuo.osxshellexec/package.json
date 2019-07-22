@@ -1,0 +1,14 @@
+{
+  "name": "cn.yanjiashuo.osxshellexec",
+  "version": "0.0.1",
+  "description": "osx shell exec",
+  "cordova": {
+    "id": "cn.yanjiashuo.osxshellexec",
+    "platforms": ["osx"]
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "zhangming",
+  "license": "ISC"
+}

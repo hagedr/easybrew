@@ -1,0 +1,17 @@
+[
+    {
+        "value": "--port 6379",
+        "desp": "监听端口，默认为 6379",
+        "reg": "--port\\s+\\d+"
+    },
+    {
+        "value": "--bind 127.0.0.1",
+        "desp": "指定 Redis 只接收来自于该 IP 地址的请求，如果不进行设置，那么将处理所有请求",
+        "reg": "--bind\\s+\\w+"
+    },
+    {
+        "value": "--daemonize no",
+        "desp": "默认情况下，redis不是在后台运行的，如果需要在后台运行，把该项的值更改为 yes。",
+        "reg": "--daemonize\\s+(yes|no)"
+    }
+]

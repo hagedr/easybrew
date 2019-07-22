@@ -1,0 +1,26 @@
+{
+  "cordova-plugin-whitelist": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-whitelist@1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-app-config": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-app-config"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cn.yanjiashuo.osxshellexec": {
+    "source": {
+      "type": "local",
+      "path": "/Users/ming/workspace-other/myplugin/node_modules/cn.yanjiashuo.osxshellexec"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}

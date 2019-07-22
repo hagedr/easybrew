@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin id="cn.yanjiashuo.osxshellexec" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>OSXShellExec</name>
+    <js-module name="OSXShellExec" src="www/OSXShellExec.js">
+        <clobbers target="OSXShellExec" />
+    </js-module>
+    
+    <platform name="osx">
+        <config-file target="config.xml" parent="/*">
+            <feature name="OSXShellExec">
+                <param name="ios-package" value="OSXShellExec"></param>
+            </feature>
+        </config-file>
+        <header-file src="src/osx/OSXShellExec.h" />
+        <source-file src="src/osx/OSXShellExec.m" />
+    </platform>
+</plugin>

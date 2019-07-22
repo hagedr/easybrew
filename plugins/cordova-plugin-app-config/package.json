@@ -1,0 +1,55 @@
+{
+  "_from": "cordova-plugin-app-config",
+  "_id": "cordova-plugin-app-config@0.2.0",
+  "_inBundle": false,
+  "_integrity": "sha1-IsSnqGlSxGTnt7L2saVMVOgKOb0=",
+  "_location": "/cordova-plugin-app-config",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "cordova-plugin-app-config",
+    "name": "cordova-plugin-app-config",
+    "escapedName": "cordova-plugin-app-config",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-app-config/-/cordova-plugin-app-config-0.2.0.tgz",
+  "_shasum": "22c4a7a86952c464e7b7b2f6b1a54c54e80a39bd",
+  "_spec": "cordova-plugin-app-config",
+  "_where": "/Users/ming/workspace-other/myplugin",
+  "author": {
+    "name": "George Bragin"
+  },
+  "bugs": {
+    "url": "https://github.com/BlackFoks/cordova-plugin-app-config/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-app-config",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "deprecated": false,
+  "description": "A plugin to read iOS app plist file.",
+  "homepage": "https://github.com/BlackFoks/cordova-plugin-app-config#readme",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-app-config",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlackFoks/cordova-plugin-app-config.git"
+  },
+  "version": "0.2.0"
+}

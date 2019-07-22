@@ -1,0 +1,151 @@
+    #list-page {
+        widows: 100vw;
+        height: 100vh;
+        @leftPanelWidth: 200px;
+        @backgroundColor: rgb(248, 248, 248);
+        overflow: hidden;
+        background-color: @backgroundColor;
+
+        .left-panel {
+            width: @leftPanelWidth;
+            float: left;
+            height: 100vh;
+            border-right: 1px solid rgb(221, 221, 221);
+        }
+
+        .main-panel {
+            height: 100vh;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            width: calc(~"100vw-@{leftPanelWidth}");
+            margin-left: @leftPanelWidth;
+            padding: 15px;
+
+            table.table {
+                width: 100%;
+                background-color: white;
+
+                tbody.gray-row {
+                    background-color: @backgroundColor;
+
+                    .tr {
+                        background-color: @backgroundColor;
+
+                        .td {
+                            background-color: @backgroundColor;
+                        }
+                    }
+                }
+
+                .state-img {
+                    background-size: 100% 100%;
+                    width: 30px;
+                    height: 30px;
+
+                    &.green {
+                        background-image: url(../images/green.png);
+                    }
+
+                    &.yellow {
+                        background-image: url(../images/yellow.png);
+                    }
+
+                    &.red {
+                        background-image: url(../images/red.png);
+                    }
+
+                    &.gray {
+                        background-image: url(../images/gray.png);
+                    }
+                }
+
+                thead th,
+                tbody td {
+                    border-left: none;
+                    border-right: none;
+                }
+
+                thead {
+                    th {
+                        height: 25px;
+                        line-height: 25px;
+                    }
+                }
+
+                tbody {
+                    td {
+                        // height: 30px;
+                        line-height: 30px;
+                        // padding: 4px 10px;
+
+
+                        .switch-component {
+                            top: 5px;
+                        }
+
+                        .button {
+                            top: 1.5px;
+                        }
+                    }
+                }
+
+                .param-td {
+                    padding: 10px;
+                    background-color: @backgroundColor;
+
+                    .param-area {
+                        border: 1px solid gray;
+                        border-radius: 10px;
+                        background-color: white;
+                        padding: 10px;
+                        width: 100%;
+                        box-shadow: 2px 2px 2px #c5c5c5;
+                        position: relative;
+                        display: inline-block;
+
+                        &::after {
+                            content: " ";
+                            position: absolute;
+                            bottom: 100%;
+                            /* 提示工具头部 */
+                            right: 100px;
+                            margin-left: -5px;
+                            border-width: 5px;
+                            border-style: solid;
+                            border-color: transparent transparent black transparent;
+                        }
+
+                        .param-table {
+                            border: none;
+
+                            tr,
+                            td {
+                                border: none;
+
+                                .button {
+                                    top: 0px;
+                                }
+                            }
+
+                            width: 100%;
+
+                            .check-td {
+                                width: 35px;
+                            }
+
+                            .param-input {
+                                min-width: 300px;
+                                max-width: 500px;
+                            }
+
+                            .save-btn,
+                            .add-btn {
+                                float: right;
+                                margin-left: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }

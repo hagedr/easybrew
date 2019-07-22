@@ -1,0 +1,52 @@
+<div id="list-page" data-ng-init="init()">
+    <div class="left-panel"></div>
+    <div class="main-panel">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>状态</th>
+                    <th>自动开启</th>
+                    <th>Root方式</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+
+            <tbody data-ng-repeat="d in servicesList track by $index">
+                <tr>
+                    <td>{{d.Name}}</td>
+                    <td>{{d.Status=='started'?'已启动':'已停止'}}</td>
+                    <td>Accord</td>
+                    <td>2009</td>
+                    <td>
+                            <button data-ng-click="showParams(d)">参数</button>
+                    </td>
+                </tr>
+                <tr data-ng-show="selectedModule.Name==d.Name">
+                    <td colspan="6" class="param-td">
+                        <table class="param-table">
+                            <tr data-ng-repeat="c in config.ProgramArguments track by $index">
+                                <td class="check-td">
+                                    <label>
+                                        <input class="filled-in" type="checkbox" />
+                                        <span></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <input data-ng-model="c" class="param-input">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                        <button data-ng-click="addParam()">新增</button>
+                                        <button data-ng-click="showParams(d)">保存</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
