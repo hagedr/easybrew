@@ -10,6 +10,26 @@
   height: 100vh;
   border-right: 1px solid #dddddd;
 }
+#list-page .left-panel .logo {
+  background: url(../img/logo.png);
+  background-size: 100% 100%;
+  width: 190px;
+  height: 190px;
+  position: absolute;
+  top: 30px;
+  left: 5px;
+}
+#list-page .left-panel .online-config {
+  height: 30px;
+  line-height: 30px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+#list-page .left-panel .online-config .switch-component {
+  top: 5px;
+  margin-right: 5px;
+}
 #list-page .main-panel {
   height: 100vh;
   overflow-y: scroll;
@@ -71,8 +91,8 @@
   background-color: #f8f8f8;
 }
 #list-page .main-panel table.table .param-td .param-area {
-  border: 1px solid gray;
-  border-radius: 10px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
   background-color: white;
   padding: 10px;
   width: 100%;
@@ -109,6 +129,7 @@
 #list-page .main-panel table.table .param-td .param-area .param-table .param-input {
   min-width: 300px;
   max-width: 500px;
+  border-radius: 2px;
 }
 #list-page .main-panel table.table .param-td .param-area .param-table .save-btn,
 #list-page .main-panel table.table .param-td .param-area .param-table .add-btn {

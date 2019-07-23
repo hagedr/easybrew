@@ -96,6 +96,21 @@
         NSLog(@"finally");
     }
 }
+-(void)getAppPath:(CDVInvokedUrlCommand *)command{
+    @try{
+        //获取当前app的路径
+        NSString *resourcePath=[[NSBundle mainBundle] resourcePath];
+        //如果没有入参,则回调JS失败函数
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:resourcePath];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }@catch (NSException *exception) {
+        NSLog(@"%@", exception);
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:exception.reason];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }@finally {
+        NSLog(@"finally");
+    }
+}
 -(void)exec:(CDVInvokedUrlCommand *)command{
     // UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"testPluginFunction" preferredStyle:UIAlertControllerStyleAlert];
     

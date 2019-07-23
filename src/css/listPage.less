@@ -11,6 +11,29 @@
             float: left;
             height: 100vh;
             border-right: 1px solid rgb(221, 221, 221);
+
+            .logo{
+                background: url(../img/logo.png);
+                background-size: 100% 100%;
+                width: 190px;
+                height: 190px;
+                position: absolute;
+                top: 30px;
+                left: 5px;
+            }
+
+            .online-config{
+                height: 30px;
+                line-height: 30px;
+                position: absolute;
+                bottom: 20px;
+                left: 20px;
+
+                .switch-component{
+                    top: 5px;
+                    margin-right: 5px;
+                }
+            }
         }
 
         .main-panel {
@@ -94,8 +117,8 @@
                     background-color: @backgroundColor;
 
                     .param-area {
-                        border: 1px solid gray;
-                        border-radius: 10px;
+                        border: 1px solid lightgrey;
+                        border-radius: 2px;
                         background-color: white;
                         padding: 10px;
                         width: 100%;
@@ -136,6 +159,7 @@
                             .param-input {
                                 min-width: 300px;
                                 max-width: 500px;
+                                border-radius: 2px;
                             }
 
                             .save-btn,

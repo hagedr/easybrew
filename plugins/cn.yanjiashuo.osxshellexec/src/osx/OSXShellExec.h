@@ -14,5 +14,6 @@
 -(void)savePlist:(CDVInvokedUrlCommand *)command;
 -(void)readTextFile:(CDVInvokedUrlCommand *)command;
 -(void)saveTextFile:(CDVInvokedUrlCommand *)command;
+-(void)getAppPath:(CDVInvokedUrlCommand *)command;
 
 @end

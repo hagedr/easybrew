@@ -13,8 +13,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
-    style: './src/style.js',
-    index: './src/index.js'
+    script: './src/index.js',
+    style: [
+      './src/style.js',
+      'font-awesome-loader'
+    ]
   },
   output: {
     filename: '[name].bundle.js',
@@ -207,9 +210,13 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
       },
+      // {
+      //   test: /\.(eot|svg|ttf|woff|woff2)\w*/,
+      //   loader: 'url-loader?limit=1000000'
+      // },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-        loader: 'url-loader',
+        loader: 'url-loader?limit=1000000000',
         options: {
           limit: 300000000
         }

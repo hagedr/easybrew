@@ -31,8 +31,6 @@ export default angular.module('easy-brew', ['ui.router'])
                 if (result) {
                     result = result.split('\n');
 
-
-
                     let indexs = [];
                     let firstLetter = true;
                     let title = result[0];
@@ -83,7 +81,6 @@ export default angular.module('easy-brew', ['ui.router'])
     }])
     .controller('listPageCtrl', ['$scope', '$timeout', '$http', 'shell', function ($scope, $timeout, $http, shell) {
 
-        let configOnline = false;
         let brew = '/usr/local/bin/brew';
         let find = '/usr/bin/find';
         let rm = '/bin/rm';
@@ -92,48 +89,69 @@ export default angular.module('easy-brew', ['ui.router'])
         let userHome = `/Users/${window.user}`;
         let supportPath = `/Users/${window.user}/Library/Application Support/cn.yanjiashuo.easybrew/files`;
 
+        $scope.globalConfig = {};
         $scope.selectedModule = {};
         $scope.showParamPanel = false;
         $scope.servicesList = [];
         $scope.config = {};
 
         $scope.init = function () {
-            Promise.all([
-                OSXShellExec.execShell(`${brew} services list`),
-                OSXShellExec.execShell(`${find} ${userHome}/Library/LaunchAgents -iname homebrew.mxcl.*.plist`),
-                OSXShellExec.execShell(`${launchctl} list`)
-            ])
-                .then((datas) => {
-                    let data = datas[0];
-                    let plist = datas[1];
-                    let services = datas[2];
-                    data = shell.shellTableResult(data);
-                    services = shell.shellTableResult(services);
+            let defaultConfig = {
+                onlineConfig: false,
+                serverUrl: 'http://' + 'easybr' + 'ew.' + 'yanjia' + 'shuo.c' + 'n/co' + 'nf'
+            };
+            debugger;
+            OSXShellExec.readTextFile(`${supportPath}/config.json`)
+                .then((conf) => {
+                    if (!conf) {
+                        OSXShellExec.saveTextFile(`${supportPath}/config.json`, angular.toJson(defaultConfig));
+                    }
+                    conf = angular.fromJson(conf);
 
-                    debugger;
+                    $scope.globalConfig = angular.extend({}, defaultConfig, conf);
 
-                    data.map(d => {
-                        d.BrewStatus = d.Status;
-                        d.AtLogin = plist.split('\n').some(p => {
-                            return p.endsWith(`${d.Name}.plist`);
+                    Promise.all([
+                        OSXShellExec.execShell(`${brew} services list`),
+                        OSXShellExec.execShell(`${find} ${userHome}/Library/LaunchAgents -iname homebrew.mxcl.*.plist`),
+                        OSXShellExec.execShell(`${launchctl} list`)
+                    ])
+                        .then((datas) => {
+                            let data = datas[0];
+                            let plist = datas[1];
+                            let services = datas[2];
+                            data = shell.shellTableResult(data);
+                            services = shell.shellTableResult(services);
+
+                            debugger;
+
+                            data.map(d => {
+                                d.BrewStatus = d.Status;
+                                d.AtLogin = plist.split('\n').some(p => {
+                                    return p.endsWith(`${d.Name}.plist`);
+                                });
+                                let sv = services.filter(s => {
+                                    return s.Label == `homebrew.mxcl.${d.Name}`;
+                                });
+                                if (sv.length == 1) {
+                                    let ss = sv[0];
+                                    if (ss.PID == '-') {
+                                        d.Status = 'stopped';
+                                    } else {
+                                        d.Status = 'started';
+                                    }
+                                }
+                            });
+                            $timeout(function () {
+                                console.log(data);
+                                $scope.servicesList = data;
+                            });
                         });
-                        let sv = services.filter(s => {
-                            return s.Label == `homebrew.mxcl.${d.Name}`;
-                        });
-                        if (sv.length == 1) {
-                            let ss = sv[0];
-                            if (ss.PID == '-') {
-                                d.Status = 'stopped';
-                            } else {
-                                d.Status = 'started';
-                            }
-                        }
-                    })
-                    $timeout(function () {
-                        console.log(data);
-                        $scope.servicesList = data;
-                    })
-                })
+                });
+        };
+
+        $scope.updateConfig = function(){
+            console.log(angular.toJson($scope.globalConfig));
+            OSXShellExec.saveTextFile(`${supportPath}/config.json`, angular.toJson($scope.globalConfig));
         };
 
         $scope.showParams = function (d, event) {

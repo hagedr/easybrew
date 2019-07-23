@@ -1,5 +1,10 @@
 <div id="list-page" data-ng-init="init()">
-    <div class="left-panel"></div>
+    <div class="left-panel">
+        <div class="logo"></div>
+        <div class="online-config">
+            <input type="checkbox" id="online-config" data-ng-model="globalConfig.onlineConfig" data-ng-change="updateConfig()" class="switch-component"><label for="online-config">联机获取配置</label>
+        </div>
+    </div>
     <div class="main-panel">
         <div class="">
             <table class="table is-bordered is-striped is-fullwidth is-hoverable">
@@ -35,17 +40,25 @@
                         </td>
                         <td align="center">
                             <input type="checkbox" class="switch-component" data-ng-model="d.AtLogin"
-                            data-ng-click="toggleAtLogin(d, $event)">
+                                data-ng-click="toggleAtLogin(d, $event)">
                         </td>
                         <td align="center">
                             <input type="checkbox" class="switch-component" readonly disabled>
                         </td>
                         <td align="center">
-                                <a href="javascript:;" class="button is-small "
-                                    data-ng-click="toggleModule(d, $event)">{{d.Status=='started'?'停止':'启动'}}</a>
+                            <a href="javascript:;" class="button is-small {{d.Status=='started'?'is-danger':'is-success'}}"
+                                data-ng-click="toggleModule(d, $event)">
+                                <span class="icon is-small">
+                                    <i class="fa {{d.Status=='started'?'fa-stop':'fa-play'}}"></i>
+                                </span>
+                                <span>{{d.Status=='started'?'停止':'启动'}}</span></a>
                             <!-- <input type="button" value="Params" data-ng-click="showParams(d)"> -->
-                            <a href="javascript:;" class="button is-small "
-                                data-ng-click="showParams(d, $event)">参数</a>
+                            <a href="javascript:;" class="button is-small is-primary" data-ng-click="showParams(d, $event)">
+                                <span class="icon is-small">
+                                    <i class="fa fa-list-alt"></i>
+                                </span>
+                                <span>参数</span>
+                            </a>
                         </td>
                     </tr>
                     <tr data-ng-show="selectedModule==d&&showParamPanel">
@@ -55,7 +68,8 @@
                                     <tr data-ng-repeat="c in config.params track by $index">
                                         <td class="check-td">
                                             <label>
-                                                <input class="filled-in" type="checkbox" data-ng-model="c.checked" data-ng-disabled="$index==0"/>
+                                                <input class="filled-in" type="checkbox" data-ng-model="c.checked"
+                                                    data-ng-disabled="$index==0" />
                                                 <span></span>
                                             </label>
                                         </td>
@@ -87,6 +101,11 @@
                                                         data-ng-model="c.value"
                                                         class="param-input  is-small input {{(c.valid==false)?'is-danger':((c.warning==true)?'is-warning':'')}}"
                                                         alt="{{c.desp||'no description'}}">
+                                                    <input type="{{c.type}}" data-ng-readonly="$index==0"
+                                                        data-ng-if="c.type=='label'"
+                                                        data-ng-model="c.value"
+                                                        class="param-input is-static is-small input {{(c.valid==false)?'is-danger':((c.warning==true)?'is-warning':'')}}"
+                                                        alt="{{c.desp||'no description'}}">
                                                     <div data-ng-if="c.type=='select'"
                                                         class="select is-small {{(c.valid==false)?'is-danger':((c.warning==true)?'is-warning':'')}}">
                                                         <select class=" param-input"
@@ -106,9 +125,19 @@
                                         <td></td>
                                         <td>
                                             <a href="javascript:;" class="button is-small is-primary "
-                                                data-ng-click="addParam()">新增</a>
+                                                data-ng-click="addParam()">
+                                                <span class="icon is-small">
+                                                    <i class="fa fa-plus"></i>
+                                                </span>
+                                                <span>新增</span>
+                                            </a>
                                             <a href="javascript:;" class="button is-small is-success "
-                                                data-ng-click="saveParams(d)">保存</a>
+                                                data-ng-click="saveParams(d)">
+                                                <span class="icon is-small">
+                                                    <i class="fa fa-save"></i>
+                                                </span>
+                                                <span>保存</span>
+                                            </a>
                                         </td>
                                     </tr>
                                 </table>

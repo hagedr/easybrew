@@ -57,3 +57,13 @@ exports.saveTextFile = function (path, content) {
         }, 'OSXShellExec', 'saveTextFile', [path, content]);
     })
 };
+
+exports.getAppPath = function () {
+    return new Promise(function (resolve, reject) {
+        exec(function (result) {
+            resolve(result);
+        }, function (err) {
+            reject(err)
+        }, 'OSXShellExec', 'getAppPath', []);
+    })
+};
