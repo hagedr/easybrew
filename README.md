@@ -47,12 +47,12 @@ OSX到10.14后，LaunchRocket不能用了。虽然启停服务也就是一个命
     ]
 }
 ```
-override:你可以将配置文件手动放入上面所说的目录（~/Library/Application Support/cn.yanjiashuo.easybrew/files）。如果开启了在线获取配置，那么就会用在线获取的配置文件覆盖本地的配置。如果不想这么做，override设置为false。
-config:
-type:参数的展示方式，默认为text，是一个文本框，可以手动输入。number，限制输入为数字。label，不需要用户输入。select，显示为下拉框，配合options属性。
-value:默认的值。
-desp:参数描述。
-reg:参数校验的正则表达式。为空不校验。
-warning:有些参数比较危险，加这个属性可以用黄色的边框提醒下。
-prefix，suffix:参数的前缀和后缀，会和用户的输入值拼接${prefix}${value}${suffix}，注意如果需要空格的话要带上。
+- ***override***:你可以将配置文件手动放入上面所说的目录（~/Library/Application Support/cn.yanjiashuo.easybrew/files）。如果开启了在线获取配置，那么就会用在线获取的配置文件覆盖本地的配置。如果不想这么做，override设置为false。
+- ***config***:
+   - **type**:参数的展示方式，默认为text，是一个文本框，可以手动输入。number，限制输入为数字。label，不需要用户输入。select，显示为下拉框，配合options属性。
+   - **value**:默认的值。
+   - **desp**:参数描述。
+   - **reg**:参数校验的正则表达式。为空不校验。
+   - **warning**:有些参数比较危险，加这个属性可以用黄色的边框提醒下。
+   - **prefix，suffix**:参数的前缀和后缀，会和用户的输入值拼接${prefix}${value}${suffix}，注意如果需要空格的话要带上。
 
