@@ -98,7 +98,7 @@ export default angular.module('easy-brew', ['ui.router'])
         $scope.init = function () {
             let defaultConfig = {
                 onlineConfig: false,
-                serverUrl: 'http://' + 'easybr' + 'ew.' + 'yanjia' + 'shuo.c' + 'n/co' + 'nf'
+                serverUrl: 'https://raw.githubusercontent.com/hagedr/easybrew/master/src/config'
             };
             debugger;
             OSXShellExec.readTextFile(`${supportPath}/config.json`)
@@ -149,7 +149,7 @@ export default angular.module('easy-brew', ['ui.router'])
                 });
         };
 
-        $scope.updateConfig = function(){
+        $scope.updateConfig = function () {
             console.log(angular.toJson($scope.globalConfig));
             OSXShellExec.saveTextFile(`${supportPath}/config.json`, angular.toJson($scope.globalConfig));
         };
@@ -192,16 +192,46 @@ export default angular.module('easy-brew', ['ui.router'])
                 .then((plist) => {
                     console.log(plist);
                     $scope.config = plist;
-                    return OSXShellExec.readTextFile(`${supportPath}/homebrew.mxcl.${name}.json`)
+                    let promises = [];
+                    promises.push(OSXShellExec.readTextFile(`${supportPath}/homebrew.mxcl.${name}.json`));
+                    if ($scope.globalConfig.onlineConfig == true) {
+                        promises.push(
+                            new Promise((resolve, reject) => {
+                                $.ajax({
+                                    type: 'get',
+                                    dataType: 'json',
+                                    url: `${$scope.globalConfig.serverUrl}/homebrew.mxcl.${name}.json`,
+                                    success: (data) => {
+                                        resolve(data);
+                                    }, 
+                                    error: (err) => {
+                                        resolve({});
+                                    }
+                                })
+                            })
+                        );
+                    }
+                    return Promise.all(promises);
                 })
-                .then((conf) => {
+                .then((confs) => {
+                    debugger;
+                    let conf = confs[0];
+                    let onlineConfig = confs[1];
+
                     if (conf) {
                         conf = angular.fromJson(conf);
                     } else {
-                        conf = [];
+                        conf = {override: true, config: []};
                     }
-
-                    debugger;
+                    if (onlineConfig) {
+                        // if(conf.length == 0 && onlineConfig.length > 0){
+                            let override = conf.override;
+                            conf = onlineConfig;
+                            if(override == true){
+                                OSXShellExec.saveTextFile(`${supportPath}/homebrew.mxcl.${name}.json`, angular.toJson(conf));
+                            }
+                        // }
+                    }
 
                     let params = [];
                     angular.forEach($scope.config.ProgramArguments, (v, k) => {
@@ -212,7 +242,8 @@ export default angular.module('easy-brew', ['ui.router'])
                             }));
                         } else {
                             let result = false;
-                            for (let c of conf) {
+                            for (let i = 0; i < conf.length; i++) {
+                                let c = conf[i];
                                 let reg = c.reg;
                                 if (reg && reg.trim().length > 0) {
                                     result = new RegExp(reg).test(v);//eval(`/${reg}/.test("${v}")`);
