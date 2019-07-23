@@ -139,7 +139,7 @@ export default angular.module('easy-brew', ['ui.router'])
             debugger;
             OSXShellExec.readTextFile(`${supportPath}/config.json`)
                 .then((conf) => {
-                    if (!conf) {
+                    if (!conf || conf == '{}') {
                         OSXShellExec.saveTextFile(`${supportPath}/config.json`, angular.toJson(defaultConfig));
                     }
                     conf = angular.fromJson(conf);

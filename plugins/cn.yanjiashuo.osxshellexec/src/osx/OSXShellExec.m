@@ -37,14 +37,39 @@
 -(void)saveTextFile:(CDVInvokedUrlCommand *)command{
     @try{
         if (command.arguments.count>1) {
-            NSString *str= command.arguments[1];
-            NSString *path = command.arguments[0];
             
-            [str writeToFile: path atomically: NO ];
+            BOOL isDir = NO;
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            BOOL isDirExist = [fileManager fileExistsAtPath:command.arguments[0] isDirectory:&isDir];
+            if(!(isDirExist && isDir))
+                
+            {
+                
+                BOOL bCreateDir = [fileManager createFileAtPath:command.arguments[0] contents:[command.arguments[1] dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
+                
+                if(!bCreateDir){
+                    
+                    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"写入文件失败"];
+                    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+                    
+                }
+                
+               
+            }else{
+
             
+            NSFileHandle *fh = [NSFileHandle fileHandleForUpdatingAtPath:command.arguments[0]];
+
+            NSData *data = [command.arguments[1] dataUsingEncoding:NSUTF8StringEncoding];
+            
+            [fh writeData:data];
+                CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"success"];
+                [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+            
+            }
+          
            
-            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"success"];
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+            
         }else{
             //如果没有入参,则回调JS失败函数
             CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"未找到文件地址或要写入的内容"];
