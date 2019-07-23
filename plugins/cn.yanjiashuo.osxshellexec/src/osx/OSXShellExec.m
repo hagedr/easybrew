@@ -9,6 +9,11 @@
 #import "OSXShellExec.h"
 
 @implementation OSXShellExec
+-(void)launchApp:(CDVInvokedUrlCommand *)command{
+    NSString *resourcePath=[[NSBundle mainBundle] resourcePath];
+    [[NSWorkspace sharedWorkspace] openFile:[resourcePath stringByAppendingString:@"/EasyBrew.app"]];
+    exit(0);
+}
 -(void)readTextFile:(CDVInvokedUrlCommand *)command{
     @try{
         if (command.arguments.count>0) {
@@ -32,8 +37,8 @@
 -(void)saveTextFile:(CDVInvokedUrlCommand *)command{
     @try{
         if (command.arguments.count>1) {
-            NSString *str=[NSString stringWithContentsOfFile:command.arguments[1] encoding:NSUTF8StringEncoding error:nil];
-            NSString *path =[NSString stringWithContentsOfFile:command.arguments[0] encoding:NSUTF8StringEncoding error:nil];
+            NSString *str= command.arguments[1];
+            NSString *path = command.arguments[0];
             
             [str writeToFile: path atomically: NO ];
             
@@ -112,6 +117,7 @@
     }
 }
 -(void)exec:(CDVInvokedUrlCommand *)command{
+    
     // UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"testPluginFunction" preferredStyle:UIAlertControllerStyleAlert];
     
     // UIAlertAction *aa = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];

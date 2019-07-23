@@ -133,7 +133,7 @@ export default angular.module('easy-brew', ['ui.router'])
 
         $scope.init = function () {
             let defaultConfig = {
-                onlineConfig: false,
+                onlineConfig: true,
                 serverUrl: 'https://raw.githubusercontent.com/hagedr/easybrew/master/src/config'
             };
             debugger;

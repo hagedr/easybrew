@@ -1,5 +1,6 @@
 var exec = require('cordova/exec');
 
+
 exports.execShell = function (cmd, success, error) {
     return new Promise(function (resolve, reject) {
         exec(function (result) {
