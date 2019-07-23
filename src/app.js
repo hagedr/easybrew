@@ -60,7 +60,7 @@ export default angular.module('easy-brew', ['ui.router'])
                     let indexs = [];
                     let firstLetter = true;
                     let title = result[0];
-                    let values = [];
+                    let values = []; 
 
                     if (title.indexOf('\t') > -1) {
                         for (let i = 1; i < result.length; i++) {
