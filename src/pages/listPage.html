@@ -77,7 +77,7 @@
                                                 {{c.prefix}}
                                             </td>
                                             <td data-ng-if="c.type=='text'||c.type=='number'" colspan="{{p.colspan}}">
-                                                <input type="{{c.type}}" data-ng-if="c.type=='text'||c.type=='number'" data-ng-model="c.value" class="param-input is-small input {{(c.valid==false)?'is-danger':((c.warning==true)?'is-warning':'')}}" alt="{{c.desp||'no description'}}">
+                                                <input type="{{c.type}}" data-ng-if="c.type=='text'||c.type=='number'" data-ng-model="c.value" class="param-input is-small input {{(c.valid==false)?'is-danger':((c.warning==true)?'is-warning':'')}}" alt="{{c.desp||'暂无描述'}}">
                                             </td>
                                             <td data-ng-if="c.type=='select'" colspan="{{p.colspan}}">
                                                 <div class="select is-small {{(c.valid==false)?'is-danger':((c.warning==true)?'is-warning':'')}}">
@@ -100,15 +100,15 @@
                                                         data-ng-if="c.type=='text'||c.type=='number'"
                                                         data-ng-model="c.value"
                                                         class="param-input  is-small input {{(c.valid==false)?'is-danger':((c.warning==true)?'is-warning':'')}}"
-                                                        alt="{{c.desp||'no description'}}">
+                                                        data-ng-tooltip="{{c.desp||'暂无描述'}}">
                                                     <input type="{{c.type}}" data-ng-readonly="$index==0"
                                                         data-ng-if="c.type=='label'"
                                                         data-ng-model="c.value"
                                                         class="param-input is-static is-small input {{(c.valid==false)?'is-danger':((c.warning==true)?'is-warning':'')}}"
-                                                        alt="{{c.desp||'no description'}}">
+                                                        data-ng-tooltip="{{c.desp||'暂无描述'}}">
                                                     <div data-ng-if="c.type=='select'"
                                                         class="select is-small {{(c.valid==false)?'is-danger':((c.warning==true)?'is-warning':'')}}">
-                                                        <select class=" param-input"
+                                                        <select class=" param-input" data-ng-tooltip="{{c.desp||'暂无描述'}}"
                                                             data-ng-options="op.label as op.value for op in c.options"
                                                             data-ng-model="c.value"></select>
                                                     </div>

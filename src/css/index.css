@@ -70,26 +70,36 @@ body {
 .switch-component:checked::after {
   left: 50%;
 }
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-  /* 悬停元素上显示点线 */
-}
-/* Tooltip 文本 */
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-  /* 定位 */
+.mytooltip {
+  font-size: 12px;
+  line-height: 1.5;
   position: absolute;
-  z-index: 1;
+  padding: 5px;
+  z-index: 100003;
+  opacity: 0.8;
 }
-/* 鼠标移动上去后显示提示框 */
-.tooltip:hover .tooltiptext {
-  visibility: visible;
+.tipsy-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  border: 6px dashed #FFA500;
+  top: 0;
+  left: 20%;
+  margin-left: -5px;
+  border-bottom-style: solid;
+  border-top: 0;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.tipsy-arrow-n {
+  border-bottom-color: #FFA500;
+}
+.tipsy-inner {
+  background-color: #FFA500;
+  color: #fff;
+  max-width: 300px;
+  padding: 5px 8px 4px 8px;
+  text-align: left;
+  border-radius: 3px;
 }

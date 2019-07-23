@@ -15,6 +15,42 @@ export default angular.module('easy-brew', ['ui.router'])
             controller: 'listPageCtrl'
         });
     }])
+    .directive("ngTooltip", function () {
+        return {
+            restrict: "AE",
+            link: function (scope, element, attrs, supermanCtrl) {
+                console.log(element);
+                element.bind("mouseover", function (e) {
+                    debugger;
+                    // if (noTitle) {
+                    //     isTitle = true;
+                    // } else {
+                    //     isTitle = $.trim(this.title) != '';
+                    // }
+                    // if (isTitle) {
+                        let elem = $(this);
+                        let tooltip =
+                            $("<div class='mytooltip'><div class='tipsy-arrow tipsy-arrow-n'></div><div class='tipsy-inner'>" + elem.data('ngTooltip') +
+                            "</div></div>");
+                        $('body').append(tooltip);
+                        tooltip.css({
+                            "top": (e.pageY + 20) + "px",
+                            "left": (e.pageX - 20) + "px"
+                        }).show('fast');
+                    // }
+                });
+                element.bind("mouseout", function (e) {
+                    $('.mytooltip').remove();
+                });
+                element.bind("mousemove", function (e) {
+                    $('.mytooltip').css({
+                        "top": (e.pageY + 20) + "px",
+                        "left": (e.pageX - 20) + "px"
+                    });
+                });
+            }
+        }
+    })
     .service('shell', [function () {
         return {
             //处理表格式的返回结果，例如
@@ -203,7 +239,7 @@ export default angular.module('easy-brew', ['ui.router'])
                                     url: `${$scope.globalConfig.serverUrl}/homebrew.mxcl.${name}.json`,
                                     success: (data) => {
                                         resolve(data);
-                                    }, 
+                                    },
                                     error: (err) => {
                                         resolve({});
                                     }
@@ -218,18 +254,18 @@ export default angular.module('easy-brew', ['ui.router'])
                     let conf = confs[0];
                     let onlineConfig = confs[1];
 
-                    if (conf) {
+                    if (conf && conf != '{}') {
                         conf = angular.fromJson(conf);
                     } else {
-                        conf = {override: true, config: []};
+                        conf = { override: true, config: [] };
                     }
-                    if (onlineConfig) {
+                    if (onlineConfig && onlineConfig.config) {
                         // if(conf.length == 0 && onlineConfig.length > 0){
-                            let override = conf.override;
-                            conf = onlineConfig;
-                            if(override == true){
-                                OSXShellExec.saveTextFile(`${supportPath}/homebrew.mxcl.${name}.json`, angular.toJson(conf));
-                            }
+                        let override = conf.override;
+                        conf = onlineConfig;
+                        if (override == true) {
+                            OSXShellExec.saveTextFile(`${supportPath}/homebrew.mxcl.${name}.json`, angular.toJson(conf));
+                        }
                         // }
                     }
 
@@ -242,8 +278,8 @@ export default angular.module('easy-brew', ['ui.router'])
                             }));
                         } else {
                             let result = false;
-                            for (let i = 0; i < conf.length; i++) {
-                                let c = conf[i];
+                            for (let i = 0; i < conf.config.length; i++) {
+                                let c = conf.config[i];
                                 let reg = c.reg;
                                 if (reg && reg.trim().length > 0) {
                                     result = new RegExp(reg).test(v);//eval(`/${reg}/.test("${v}")`);
@@ -274,7 +310,7 @@ export default angular.module('easy-brew', ['ui.router'])
                             }
                         }
                     });
-                    angular.forEach(conf, (c) => {
+                    angular.forEach(conf.config, (c) => {
                         if (!c.matched) {
                             params.push(angular.extend({}, defaultConfig, c, { checked: false }));
                         }
