@@ -9,11 +9,6 @@
 #import "OSXShellExec.h"
 
 @implementation OSXShellExec
--(void)launchApp:(CDVInvokedUrlCommand *)command{
-    NSString *resourcePath=[[NSBundle mainBundle] resourcePath];
-    [[NSWorkspace sharedWorkspace] openFile:[resourcePath stringByAppendingString:@"/EasyBrew.app"]];
-    exit(0);
-}
 -(void)readTextFile:(CDVInvokedUrlCommand *)command{
     @try{
         if (command.arguments.count>0) {
@@ -106,10 +101,10 @@
 -(void)savePlist:(CDVInvokedUrlCommand *)command{
     @try{
         if (command.arguments.count>1) {
-            NSString *jsonStr = command.arguments[0];
+            NSString *jsonStr = command.arguments[1];
             NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
             NSDictionary *tempDictQueryDiamond = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            [tempDictQueryDiamond writeToFile:command.arguments[1] atomically:YES];
+            [tempDictQueryDiamond writeToFile:command.arguments[0] atomically:YES];
             
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"success"];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];

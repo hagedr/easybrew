@@ -6,9 +6,6 @@ export default angular.module('easy-brew', ['ui.router'])
         window.$state = $state;
     }])
     .config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
-        //app.config配置项
-        //$stateProvider 状态供应商，（名字可以看出关于路由的一系列配置需要由$stateProvider完成）
-        //$urlRouterProvider 路由重定向
         $stateProvider.state("listPage", {
             url: "/listPage",
             template: listPage,
@@ -16,18 +13,12 @@ export default angular.module('easy-brew', ['ui.router'])
         });
     }])
     .directive("ngTooltip", function () {
+        // 显示tooltip的指令
         return {
             restrict: "AE",
             link: function (scope, element, attrs, supermanCtrl) {
                 console.log(element);
                 element.bind("mouseover", function (e) {
-                    debugger;
-                    // if (noTitle) {
-                    //     isTitle = true;
-                    // } else {
-                    //     isTitle = $.trim(this.title) != '';
-                    // }
-                    // if (isTitle) {
                         let elem = $(this);
                         let tooltip =
                             $("<div class='mytooltip'><div class='tipsy-arrow tipsy-arrow-n'></div><div class='tipsy-inner'>" + elem.data('ngTooltip') +
@@ -37,7 +28,6 @@ export default angular.module('easy-brew', ['ui.router'])
                             "top": (e.pageY + 20) + "px",
                             "left": (e.pageX - 20) + "px"
                         }).show('fast');
-                    // }
                 });
                 element.bind("mouseout", function (e) {
                     $('.mytooltip').remove();
@@ -136,7 +126,6 @@ export default angular.module('easy-brew', ['ui.router'])
                 onlineConfig: true,
                 serverUrl: 'https://raw.githubusercontent.com/hagedr/easybrew/master/src/config'
             };
-            debugger;
             OSXShellExec.readTextFile(`${supportPath}/config.json`)
                 .then((conf) => {
                     if (!conf || conf == '{}') {
@@ -158,7 +147,6 @@ export default angular.module('easy-brew', ['ui.router'])
                             data = shell.shellTableResult(data);
                             services = shell.shellTableResult(services);
 
-                            debugger;
 
                             data.map(d => {
                                 d.BrewStatus = d.Status;
@@ -191,7 +179,6 @@ export default angular.module('easy-brew', ['ui.router'])
         };
 
         $scope.showParams = function (d, event) {
-            debugger;
 
             event.preventDefault();
             event.stopPropagation();
@@ -250,7 +237,6 @@ export default angular.module('easy-brew', ['ui.router'])
                     return Promise.all(promises);
                 })
                 .then((confs) => {
-                    debugger;
                     let conf = confs[0];
                     let onlineConfig = confs[1];
 
@@ -334,7 +320,6 @@ export default angular.module('easy-brew', ['ui.router'])
 
         $scope.toggleModule = function (d) {
 
-            debugger;
 
             let name = d.Name;
             let option = 'run';
@@ -367,7 +352,6 @@ export default angular.module('easy-brew', ['ui.router'])
             // event.preventDefault();
             // event.stopPropagation();
 
-            debugger;
 
             console.log(d);
             let name = d.Name;
@@ -421,7 +405,7 @@ export default angular.module('easy-brew', ['ui.router'])
                                 KeepAliveOld = plist.KeepAlive;
                                 plist.RunAtLoad = false;
                                 plist.KeepAlive = false;
-                                return OSXShellExec.savePlist(angular.toJson(plist), target)
+                                return OSXShellExec.savePlist(target, angular.toJson(plist))
                                     .then(() => {
                                         return OSXShellExec.execShell(`${launchctl} load ${target}`);
                                     });
@@ -438,7 +422,7 @@ export default angular.module('easy-brew', ['ui.router'])
                     if (d.Status != 'started') {
                         plist.RunAtLoad = RunAtLoadOld;
                         plist.KeepAlive = KeepAliveOld;
-                        OSXShellExec.savePlist(angular.toJson(plist), target)
+                        OSXShellExec.savePlist(target, angular.toJson(plist))
                             .then(() => {
                                 $scope.init();
                             })
@@ -458,7 +442,6 @@ export default angular.module('easy-brew', ['ui.router'])
         };
 
         $scope.saveParams = function (d) {
-            debugger;
             let valid = true;
             angular.forEach($scope.config.params, (p) => {
                 p.value += '';
@@ -491,14 +474,14 @@ export default angular.module('easy-brew', ['ui.router'])
                     })
                     .then(plist => {
                         plist.ProgramArguments = params;
-                        return OSXShellExec.savePlist(angular.toJson(plist), target2);
+                        return OSXShellExec.savePlist(target2, angular.toJson(plist));
                     })
                     .then(() => {
                         return OSXShellExec.readPlist(target);
                     })
                     .then((plist) => {
                         if (plist) {
-                            return OSXShellExec.savePlist(angular.toJson(plist), target);
+                            return OSXShellExec.savePlist(target, angular.toJson(plist));
                         } else {
                             $scope.init();
                         }

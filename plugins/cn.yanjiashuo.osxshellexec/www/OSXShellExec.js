@@ -1,7 +1,7 @@
 var exec = require('cordova/exec');
 
 
-exports.execShell = function (cmd, success, error) {
+exports.execShell = function (cmd) {
     return new Promise(function (resolve, reject) {
         exec(function (result) {
             if (result) {
@@ -29,13 +29,13 @@ exports.readPlist = function (cmd) {
     })
 };
 
-exports.savePlist = function (json, path) {
+exports.savePlist = function (path, content) {
     return new Promise(function (resolve, reject) {
         exec(function (result) {
             resolve(result);
         }, function (err) {
             reject(err)
-        }, 'OSXShellExec', 'savePlist', [json, path]);
+        }, 'OSXShellExec', 'savePlist', [path, content]);
     })
 };
 
