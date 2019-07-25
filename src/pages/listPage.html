@@ -27,7 +27,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody data-ng-repeat="d in servicesList track by $index" data-ng-click="selectRow(d)"
+                <tbody data-ng-repeat="d in servicesList track by $index" 
                     class="{{$index%2==0?'gray-row':''}}">
                     <tr class="{{($index%2==0)?'zebra':''}} {{(selectedModule.Name==d.Name)?'active':''}}">
                         <td align="center">
