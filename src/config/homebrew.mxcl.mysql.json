@@ -1,0 +1,13 @@
+{
+    "version": 1,
+    "override": true,
+    "config": [
+        {
+            "value": "3306",
+            "desp": "监听端口，默认为 3306",
+            "reg": "--port\\s+\\d+\\b",
+            "prefix": "--port ",
+            "type": "number"
+        },
+    ]
+}

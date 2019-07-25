@@ -18,6 +18,11 @@
             "type": "text"
         },
         {
+            "value": "-Ptest",
+            "desp": "测试的参数",
+            "type": "label"
+        },
+        {
             "value": "no",
             "desp": "默认情况下，redis不是在后台运行的，如果需要在后台运行，把该项的值更改为 yes。",
             "reg": "--daemonize\\s+(yes|no)\\b",
