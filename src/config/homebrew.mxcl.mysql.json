@@ -5,7 +5,7 @@
         {
             "value": "3306",
             "desp": "监听端口，默认为 3306",
-            "reg": "--port=\\s+\\d+\\b",
+            "reg": "--port=\\d+\\b",
             "prefix": "--port=",
             "type": "number"
         }
